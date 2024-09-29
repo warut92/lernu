@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stilo.css">
+    <title>Lernu ไทย</title>
+    <style media="screen">
+        div.page {
+          display: none
+        }
+      </style>
+</head>
+<body>
+      <script>
+        function showPage(page) {
+          document.querySelectorAll('div').forEach(div => {
+            div.style.display = 'none'
+          });
+          ;
+          document.querySelector(`#${page}`).style.display = 'block';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.cxefabutono').forEach(button => {
+            button.onclick = function() {
+              showPage(this.dataset.page)
+            }
+          });
+          ;
+        });
+      </script>
+    </head>
+    <body>
+      <button class="cxefabutono" data-page="page1">คำศัพท์ใหม่</button>
+      <button class="cxefabutono" data-page="page2">คำอธิบาย</button>
+      <button class="cxefabutono" data-page="page3">เรื่องสั้น</button>
+      <button class="cxefabutono" data-page="page4">แบบฝึกหัด</button>
+      <button class="cxefabutono" data-page="page5">คำแนะนำ</button>
+      <button class="cxefabutono" data-page="page0">หน้าหลัก</button>
+        <div class="pag" id="page1">
+        <h1>คำศัพท์ใหม่</h1>
+        <span id="tablo"></span>
+        <script>
+            let vortoj = ['nomo','estas','familio','tuta','adreso','reto','kaj','aĝo','kio','ĝis','poŝto','via']
+            let tradukoj_en = ['name','is, are, am','family','whole, entire','address','net','and','age','what','until','mail','your']
+            console.log(tradukoj_en.length);
+            console.log(tradukoj_en);
+            console.log(vortoj.length);
+            console.log(vortoj);
+            const RANDOM_1 = Math.floor(Math.random() * vortoj.length);
+            const RANDOM_2 = Math.floor(Math.random() * vortoj.length);
+            const RANDOM_3 = Math.floor(Math.random() * vortoj.length);
+
+            let tablero = ""
+
+            //tablo de tradukoj
+            function tabligo() {
+                for (let i = 0; i < vortoj.length; i++) {
+                    tablero += vortoj[i] + " - " + tradukoj_en[i] + "<br>";
+                    // tablero += vortoj[i] + " - " + tradukoj_en[i] + "<input value=\""+ i +"\" type=\"checkbox\" checked=\"checked\"><br>";
+                    document.getElementById("tablo").innerHTML = tablero
+                }
+            }
+            tabligo()
+
+            function elektvortojn() {
+                const posicioDeVortoj = document.querySelectorAll('input[type="checkbox"]');
+                for (let i = 0; i < posicioDeVortoj.length; i++) {
+                    const e = posicioDeVortoj[i];
+                    console.log(e);     
+                }
+                
+            }
+            elektvortojn()
+        </script>
+        <br>
+       <!-- <button onclick="elektvortojn()">เริ่ม</button> -->
+      </div>
+      <div class="page" id="page2">
+        <h1>คำอธิบาย</h1>
+        <table cellpadding="5" cellspacing="1" border="1">
+            <tr><td>ไวยากรณ์</td><td>คำอธิบาย</td><td>ตัวอย่าง </td><td>เพิ่มเติม</td></tr>
+            <tr><td>-o </td><td>ตัวลงท้ายคำนาม </td><td>nomo </td><td>Pli</td></tr>
+            <tr><td>-a </td><td>ตัวลงท้ายคำคุณศัพท์ </td><td>tuta </td><td>Pli</td></tr>
+            <tr><td>-as </td><td>ตัวลงท้ายกริยากาลปัจจุบัน </td><td>estas </td><td>Pli</td></tr>
+            <tr><td>Personal pronouns </td><td>(See "More") </td><td>mi </td><td>Pli</td></tr>
+            <tr><td>Possessive pronouns </td><td>(See "More") </td><td>mia </td><td>Pli</td></tr>
+            <tr><td>ĝis </td><td>บุพบท - จนกระทั่ง มักจะใช้เป็นรูปย่อของ "Ĝis revido" - "แล้วพบกันใหม่นะ".</td><td></td><td></td></tr>
+            </table>
+      </div>
+      <div class="page" id="page3">
+        <h1>เรื่องสั้น</h1>
+        <audio controls>
+            <source src="./sonoj/1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+          </audio> <br>
+Saluton! <br>
+Mia nomo estas Ana. Mia familia nomo estas PANA.<br>
+Mia tuta nomo estas Ana PANA.<br>
+Mia adreso estas 1234 Longstrato.<br>
+Mia retpoŝt-adreso estas ana@lernu.net.<br>
+Mia aĝo estas 18.<br>
+Kio estas via nomo? Kio estas via adreso kaj via retpoŝtadreso?<br>
+Ĝis!<br>
+Ana<br>
+</div>
+      <div class="page" id="page4">
+        <h1>แบบฝึกหัด</h1>
+Mia <input  type="text" class="ekzerco"> estas Ana. Mia <input  type="text" class="ekzerco"> nomo estas PANA. Mia <input  type="text" class="ekzerco"> nomo estas Ana PANA. Mia <input  type="text" class="ekzerco">
+estas 1234 Longstrato. Mia retpoŝtadreso <input  type="text" class="ekzerco"> ana@lernu.net. Mia <input  type="text" class="ekzerco"> estas 18 (dek ok). <input  type="text" class="ekzerco">
+estas via nomo? Kio estas <input  type="text" class="ekzerco"> adreso <input  type="text" class="ekzerco"> via retpoŝtadreso?
+<br>
+<br>
+       <button onclick="kontroli()">ตรวจ</button>
+    <script>
+        const RESPONDOJ = ["nomo", "familia", "tuta", "adreso", "estas", "aĝo", "Kio", "via", "kaj"]
+        // const VIAJ_RESPONDOJ
+        function kontroli() {
+            const VIAJ_RESPONDOJ = document.querySelectorAll(".ekzerco")
+            for (let i = 0; i < VIAJ_RESPONDOJ.length; i++) {
+                if (RESPONDOJ[i] === VIAJ_RESPONDOJ[i].value) {
+                    VIAJ_RESPONDOJ[i].style.backgroundColor = "green"
+                } else {
+                    VIAJ_RESPONDOJ[i].style.backgroundColor = "red"
+                }
+            }
+        }
+    </script>
+      </div>
+      <div class="page" id="page5">
+        <h1>คำแนะนำ</h1>
+      </div>
+      <div class="page" id="page0">
+        <h1>เว็บเลรนู! โคลน เวอร์ชันภาษาไทย</h1>
+ภาพรวม หลักสูตร "Ana Pana"
+<br>
+หลักสูตรนี้แบ่งออกเป็น 8 บทย่อย โดยมีตัวละครหลักคือ Ana จากนิวยอร์ก USA
+<br>
+<li>
+<ul><a href="p1.html">Parto 1</a>	- 	Saluton</ul>
+<ul>Parto 2 	- 	Pri Ana</ul>
+<ul>Parto 3 	- 	Familio</ul>
+<ul>Parto 4 	- 	Ŝatokupoj</ul>
+<ul>Parto 5 	- 	Vetero</ul>
+<ul>Parto 6 	- 	Studoj</ul>
+<ul>Parto 6 	- 	Studoj</ul>
+<ul>Parto 7 	- 	Longa vojaĝo</ul>
+<ul>Parto 8 	- 	Lingvoj</ul>
+</li>
+Parto = ส่วน
+      </div>
+</body>
+</html>
