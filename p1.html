@@ -39,10 +39,12 @@
       <button class="cxefabutono" data-page="page0">หน้าหลัก</button>
         <div class="pag" id="page1">
         <h1>คำศัพท์ใหม่</h1>
+        สวัสดี เราชื่อ Ana ยินดีที่ได้รู้จักนะ ในบทเรียนนี้คุณจะได้เรียนรู้คำดังนี้ <br>
         <span id="tablo"></span>
         <script>
             let vortoj = ['nomo','estas','familio','tuta','adreso','reto','kaj','aĝo','kio','ĝis','poŝto','via']
             let tradukoj_en = ['name','is, are, am','family','whole, entire','address','net','and','age','what','until','mail','your']
+            let tradukoj_th = ['ชื่อ','เป็น, อยู่, คือ','ครอบครัว','ทั้งหมด, เต็ม ๆ','ที่อยู่','เน็ต','และ','อายุ','อะไร','จนกระทั่ง','จดหมาย','ของคุณ']
             console.log(tradukoj_en.length);
             console.log(tradukoj_en);
             console.log(vortoj.length);
@@ -56,7 +58,7 @@
             //tablo de tradukoj
             function tabligo() {
                 for (let i = 0; i < vortoj.length; i++) {
-                    tablero += vortoj[i] + " - " + tradukoj_en[i] + "<br>";
+                    tablero += vortoj[i] + " - " + tradukoj_en[i] + " - " + tradukoj_th[i] + "<br>";
                     // tablero += vortoj[i] + " - " + tradukoj_en[i] + "<input value=\""+ i +"\" type=\"checkbox\" checked=\"checked\"><br>";
                     document.getElementById("tablo").innerHTML = tablero
                 }
@@ -106,12 +108,29 @@ Ana<br>
 </div>
       <div class="page" id="page4">
         <h1>แบบฝึกหัด</h1>
+<h2>1</h2>   
+Saluton! <br>
+Mia nomo estas  <input id="viaNomo"  type="text" class="nomo">. <br>
+<span id="respondo"></span>
+<br>
+<br>
+<button onclick="viaNomo()">ตรวจ</button> 
+<script>
+  function viaNomo() {
+    let viaNomo = document.getElementById("viaNomo").value
+    let mesagxo = "Saluton, " + viaNomo + "! Mi estas Ana\n สวัสดี " + viaNomo + " เราชื่ออานานะ"
+    if (viaNomo !== "") {
+      document.getElementById("respondo").innerHTML = mesagxo
+    }
+  }
+</script>
+<h2>2</h2>        
 Mia <input  type="text" class="ekzerco"> estas Ana. Mia <input  type="text" class="ekzerco"> nomo estas PANA. Mia <input  type="text" class="ekzerco"> nomo estas Ana PANA. Mia <input  type="text" class="ekzerco">
 estas 1234 Longstrato. Mia retpoŝtadreso <input  type="text" class="ekzerco"> ana@lernu.net. Mia <input  type="text" class="ekzerco"> estas 18 (dek ok). <input  type="text" class="ekzerco">
 estas via nomo? Kio estas <input  type="text" class="ekzerco"> adreso <input  type="text" class="ekzerco"> via retpoŝtadreso?
 <br>
 <br>
-       <button onclick="kontroli()">ตรวจ</button>
+    <button onclick="kontroli()">ตรวจ</button>
     <script>
         const RESPONDOJ = ["nomo", "familia", "tuta", "adreso", "estas", "aĝo", "Kio", "via", "kaj"]
         // const VIAJ_RESPONDOJ
@@ -122,6 +141,7 @@ estas via nomo? Kio estas <input  type="text" class="ekzerco"> adreso <input  ty
                     VIAJ_RESPONDOJ[i].style.backgroundColor = "green"
                 } else {
                     VIAJ_RESPONDOJ[i].style.backgroundColor = "red"
+                    alert("ลองตอบใหม่นะ!")
                 }
             }
         }

@@ -26,4 +26,9 @@ img {
 
 input {
     width: 80px;
+    font-size: 16px;
+}
+
+button {
+    font-size: 20px;
 }
