@@ -41,111 +41,32 @@
         <h1>คำศัพท์ใหม่</h1>
         สวัสดี เราชื่อ Ana ยินดีที่ได้รู้จักนะ ในบทเรียนนี้คุณจะได้เรียนรู้คำดังนี้ <br>
         <span id="tabelo"></span>
-          <span id="poento"></span>
+          
         <span id="ekzerco"></span>
         <script>
             let vortoj = ['nomo','estas','familio','tuta','adreso','reto','kaj','aĝo','kio','ĝis','poŝto','via']
             let tradukoj_en = ['name','is, are, am','family','whole, entire','address','net','and','age','what','until','mail','your']
             let tradukoj_th = ['ชื่อ','เป็น, อยู่, คือ','ครอบครัว','ทั้งหมด, เต็ม ๆ','ที่อยู่','เน็ต','และ','อายุ','อะไร','จนกระทั่ง','จดหมาย','ของคุณ']
 
-            let tablero = ""
+            function cxiujVortoj(n) {
+              const posicioDeVortoj = document.querySelectorAll('input[type="checkbox"]');
 
-            //tabelo de tradukoj
-            function tabeligo() {
-                for (let i = 0; i < vortoj.length; i++) {
-                    // tablero += vortoj[i] + " - " + tradukoj_en[i] + "<br>";
-                    // tablero += vortoj[i] + " - " + tradukoj_en[i] + " - " + tradukoj_th[i] + "<br>";
-                    tablero += vortoj[i] + " - " + tradukoj_en[i] + "<input value=\""+ i +"\" type=\"checkbox\" checked=\"checked\"><br>";
-                    document.getElementById("tabelo").innerHTML = tablero
-                }
-            }
-            tabeligo()
-
-            let checkedValueArr = []
-
-            function elektvortojn() {
-              //set array to zero again
-            checkedValueArr = []
-                const posicioDeVortoj = document.querySelectorAll('input[type="checkbox"]');
                 for (let i = 0; i < posicioDeVortoj.length; i++) {
-                    const e = posicioDeVortoj[i];
-                    if (e.checked) {
-                      checkedValueArr.push(e.value)
-                    } 
-                }  
-            }
-
-            //malaperigi la tabelon
-            function kaŝiVortojn(n) {
-              if (n === 0) {
-                document.getElementById("tabelo").style.display = "none"
-                elektvortojn() 
-                enmiksigi()
-              } else {
-                document.getElementById("tabelo").style.display = "block"
-                document.getElementById("ekzerco").style.display = "none"
-              }
-              console.log(n);
-            }
-
-            let elektoj = ""
-            function enmiksigi() {
-              console.log(checkedValueArr);
-              //preni la checkedValueArr [value] por hazardigi je index
-                  // Shuffle the array inline
-                  for (let i = checkedValueArr.length - 1; i > 0; i--) {
-                      const j = Math.floor(Math.random() * (i + 1));
-                      [checkedValueArr[i], checkedValueArr[j]] = [checkedValueArr[j], checkedValueArr[i]];
+                  if (n === 1) {
+                    posicioDeVortoj[i].checked = true;    
+                  } else {
+                    posicioDeVortoj[i].checked = false;    
                   }
-
-                  // Now pick the first three non-repeating values
-                  let random = checkedValueArr[0];
-                  let random1 = checkedValueArr[1];
-                  let random2 = checkedValueArr[2];
-              //demando
-              let demanda_vorto = vortoj[random]
-              console.log(demanda_vorto);
-              //respondo
-              let respondo = tradukoj_en[random]
-              let falsa_respondo1 = tradukoj_en[random1]
-              let falsa_respondo2 = tradukoj_en[random2]
-
-              //random 1,2,3
-              let randomElekto = Math.floor(Math.random() * 5)
-              console.log(randomElekto);
-              if (randomElekto === 0) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(1)\">" + respondo + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo1 + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo2
-              } else if (randomElekto === 1) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(1)\">" + respondo + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo2 + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo1
-              } else if (randomElekto === 2) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(0)\">" + falsa_respondo1 + "</button><br><button  onclick=\"kontroliLaRespondon(1)\"> " + respondo + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo2
-              } else if (randomElekto === 3) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(0)\">" + falsa_respondo1 + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo2 + "</button><br><button  onclick=\"kontroliLaRespondon(1)\"> " + respondo
-              } else if (randomElekto === 4) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(0)\">" + falsa_respondo2 + "</button><br><button  onclick=\"kontroliLaRespondon(1)\"> " + respondo + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo1
-              } else if (randomElekto === 5) {
-                elektoj = "<button onclick=\"kontroliLaRespondon(0)\">" + falsa_respondo2 + "</button><br><button  onclick=\"kontroliLaRespondon(0)\"> " + falsa_respondo1 + "</button><br><button  onclick=\"kontroliLaRespondon(1)\"> " + respondo
-              } 
-              console.log(elektoj);
-              //enmiksigi la respondoj
-              document.getElementById("ekzerco").innerHTML = "<center><button id=\"demanda_vorto\">" + demanda_vorto + "</button><br><br>" + elektoj
-            }
-            let poento = 0
-            function kontroliLaRespondon(r) {
-              if (r === 1) {
-                enmiksigi()
-                poento++
-              } else {
-                enmiksigi()
-                poento--
-              }
-              document.getElementById("poento").innerHTML = "<center>" + poento + "</center<br><br>"
-              console.log(poento);
-            }
+            } 
+          }
         </script>
         <br>
-       <button onclick="kaŝiVortojn(0)">เริ่ม</button>
-       <!-- <button onclick="kaŝiVortojn(1)">กลับ</button> -->
+        <div class="opiciaButono">
+          <button onclick="cxiujVortoj(1)">เลือกทั้งหมด</button>
+          <button onclick="cxiujVortoj(0)">ลบทั้งหมด</button> <br>
+          <button id="kaŝiVortojn" onclick="kaŝiVortojn(0)">เริ่ม</button>
+        </div>
+        <button id="kaŝiVortojn" onclick="kaŝiVortojn(1)">กลับ</button>
       </div>
       <div class="page" id="page2">
         <h1>คำอธิบาย</h1>
@@ -246,4 +167,5 @@ Kio estas <input  type="text" class="ekzerco"> adreso <input  type="text" class=
 Parto = ส่วน
       </div>
 </body>
+<script src="ekzerco.js"></script>
 </html>
