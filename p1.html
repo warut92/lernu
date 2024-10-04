@@ -12,6 +12,8 @@
       </style>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/mailtoui@1.0.3/dist/mailtoui-min.js"></script>
+
       <script>
         function showPage(page) {
           document.querySelectorAll('div').forEach(div => {
@@ -75,8 +77,8 @@
             <tr><td>-o </td><td>ตัวลงท้ายคำนาม </td><td>nomo </td><td>Pli</td></tr>
             <tr><td>-a </td><td>ตัวลงท้ายคำคุณศัพท์ </td><td>tuta </td><td>Pli</td></tr>
             <tr><td>-as </td><td>ตัวลงท้ายกริยากาลปัจจุบัน </td><td>estas </td><td>Pli</td></tr>
-            <tr><td>Personal pronouns </td><td>(See "More") </td><td>mi </td><td>Pli</td></tr>
-            <tr><td>Possessive pronouns </td><td>(See "More") </td><td>mia </td><td>Pli</td></tr>
+            <tr><td>บุรุษสรรพนาม </td><td>(ดูที่ "Pli") </td><td>mi </td><td>Pli</td></tr>
+            <tr><td>สรรพนามแสดงควาเป็นเจ้าของ </td><td>(ดูที่ "Pli")</td><td>mia </td><td>Pli</td></tr>
             <tr><td>ĝis </td><td>บุพบท - จนกระทั่ง มักจะใช้เป็นรูปย่อของ "Ĝis revido" - "แล้วพบกันใหม่นะ".</td><td></td><td></td></tr>
             </table>
       </div>
@@ -102,47 +104,47 @@ Ana<br>
 <h2>1</h2> เติมคำในช่องวางให้ถูกต้อง <br>
 Saluton! <br>
 Mia nomo estas  <input id="viaNomo"  type="text" class="nomo">. <br>
-<span id="respondo"></span>
 <br>
 <br>
-<button onclick="viaNomo()">ตรวจ</button> 
-<script>
-  function viaNomo() {
-    let viaNomo = document.getElementById("viaNomo").value
-    let mesagxo = "Saluton, " + viaNomo + "! Mi estas Ana\n สวัสดี " + viaNomo + " เราชื่ออานานะ"
-    if (viaNomo !== "") {
-      document.getElementById("respondo").innerHTML = mesagxo
-    }
-  }
-</script>
+
+
 <h2>2</h2> เติมคำในช่องวางให้ถูกต้อง <br>
-Mia <input  type="text" class="ekzerco"> estas Ana. <br>
-Mia <input  type="text" class="ekzerco"> nomo estas PANA. <br>
-Mia <input  type="text" class="ekzerco"> nomo estas Ana PANA. <br>
-Mia <input  type="text" class="ekzerco"> estas 1234 Longstrato. <br>
-Mia retpoŝtadreso <input  type="text" class="ekzerco"> ana@lernu.net. <br>
-Mia <input  type="text" class="ekzerco"> estas 18 (dek ok). <br>
-<input  type="text" class="ekzerco"> estas via nomo? <br>
-Kio estas <input  type="text" class="ekzerco"> adreso <input  type="text" class="ekzerco"> via retpoŝtadreso?<br>
-   
+<span id="ekzercaro">
+</span>
+  
 <br>
 <br>
-    <button onclick="kontroliLaEkzercon()">ตรวจ</button>
+    <button onclick="kontroliLaEkzercon()">ส่งอีเมล</button>
+    <span id="sendiRetmesagxon"></span>
     <script>
-        const RESPONDOJ = ["nomo", "familia", "tuta", "adreso", "estas", "aĝo", "Kio", "via", "kaj"]
-        // const VIAJ_RESPONDOJ
-        function kontroliLaEkzercon() {
-            const VIAJ_RESPONDOJ = document.querySelectorAll(".ekzerco")
-            for (let i = 0; i < VIAJ_RESPONDOJ.length; i++) {
-                if (RESPONDOJ[i] === VIAJ_RESPONDOJ[i].value) {
-                    VIAJ_RESPONDOJ[i].style.backgroundColor = "green"
-                } else {
-                    VIAJ_RESPONDOJ[i].style.backgroundColor = "red"
-                    alert("ลองตอบใหม่นะ!")
-                }
-            }
+      let kursoNomo = "Parto 1 Saluton!"
+      let ekzercaroDateno = `Mia # estas Ana.  <br>
+Mia # nomo estas PANA. <br>
+Mia # nomo estas Ana PANA.  <br>
+Mia # estas 1234 Longstrato.  <br>
+Mia retpoŝtadreso # ana@lernu.net.  <br>
+Mia # estas 18 (dek ok).  <br>
+# estas via nomo?  <br>
+Kio estas # adreso # via retpoŝtadreso?`
+
+      let ekzercaro = ekzercaroDateno.replace(/#/g,"<span class=\"ekzerco\" contenteditable=\"true\">____</span>")
+      document.getElementById("ekzercaro").innerHTML = ekzercaro
+
+      // const VIAJ_RESPONDOJ
+      function kontroliLaEkzercon() {
+      let respondoj = document.getElementById("ekzercaro")
+
+      let lernantoNomo = document.getElementById("viaNomo").value
+      let MsgDeLernanto = "Saluton! Mi estas " + lernantoNomo + "%0D%0A%0D%0A"
+
+          let respondojInnerText = respondoj.innerText
+          respondojInnerText = respondojInnerText.replace(/ /g,"%20").replace(/\./g,"%0D%0A").replace(/\?/g,"%0D%0A")
+          console.log(respondojInnerText);
+          let MsgPorRetmesagxo = "subject=Leciono1&body=" + respondojInnerText
+          document.getElementById("sendiRetmesagxon").innerHTML = "<a href=\"https://mail.google.com/mail/u/0/?fs=1&to=verdaelefanto@gmail.com&su="+ kursoNomo + "&cc&bcc&body=" + MsgDeLernanto + respondojInnerText + "\n\nหากคุณมีข้อสงสัยสามารถแจ้งมาในอีเมลนี้เลย&tf=cm\" target=\"_blank\">ส่งอีเมลให้ตรวจ ภายใน 24 ชั่วโมง</a>"
         }
     </script>
+
       </div>
       <div class="page" id="page5">
         <h1>คำแนะนำ</h1>

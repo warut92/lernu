@@ -50,7 +50,6 @@ function enmiksigi() {
           const j = Math.floor(Math.random() * (i + 1));
           [checkedValueArr[i], checkedValueArr[j]] = [checkedValueArr[j], checkedValueArr[i]];
       }
-
         // Now pick the first three non-repeating values
         let random = checkedValueArr[0];
         let random1 = checkedValueArr[1];
