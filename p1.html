@@ -12,8 +12,6 @@
       </style>
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/mailtoui@1.0.3/dist/mailtoui-min.js"></script>
-
       <script>
         function showPage(page) {
           document.querySelectorAll('div').forEach(div => {
@@ -41,34 +39,25 @@
       <button class="cxefabutono" data-page="page5">คำแนะนำ</button>
         <div class="pag" id="page1">
         <h1>คำศัพท์ใหม่</h1>
-        สวัสดี เราชื่อ Ana ยินดีที่ได้รู้จักนะ ในบทเรียนนี้คุณจะได้เรียนรู้คำดังนี้ <br>
-        <span id="tabelo"></span>
-          
+        สวัสดี เราชื่อ Ana ยินดีที่ได้รู้จักนะ ในบทเรียนนี้คุณจะได้เรียนรู้คำดังนี้ 
+        <br>
+        <button onclick="lingvoElekto('th')">ไทย</button><button onclick="lingvoElekto('en')">English</button>
+        <br>
+        <br>
+        <span id="tabelo"></span> 
         <span id="ekzerco"></span>
         <script>
             let vortoj = ['nomo','estas','familio','tuta','adreso','reto','kaj','aĝo','kio','ĝis','poŝto','via']
             let tradukoj_en = ['name','is, are, am','family','whole, entire','address','net','and','age','what','until','mail','your']
             let tradukoj_th = ['ชื่อ','เป็น, อยู่, คือ','ครอบครัว','ทั้งหมด, เต็ม ๆ','ที่อยู่','เน็ต','และ','อายุ','อะไร','จนกระทั่ง','จดหมาย','ของคุณ']
-
-            function cxiujVortoj(n) {
-              const posicioDeVortoj = document.querySelectorAll('input[type="checkbox"]');
-
-                for (let i = 0; i < posicioDeVortoj.length; i++) {
-                  if (n === 1) {
-                    posicioDeVortoj[i].checked = true;    
-                  } else {
-                    posicioDeVortoj[i].checked = false;    
-                  }
-            } 
-          }
         </script>
         <br>
-        <div class="opiciaButono">
+        <span id="opciaButono">
           <button onclick="cxiujVortoj(1)">เลือกทั้งหมด</button>
           <button onclick="cxiujVortoj(0)">ลบทั้งหมด</button> <br>
-          <button id="kaŝiVortojn" onclick="kaŝiVortojn(0)">เริ่ม</button>
-        </div>
-        <button id="kaŝiVortojn" onclick="kaŝiVortojn(1)">กลับ</button>
+          <button id="komenci" onclick="kaŝiVortojn(0)">เริ่ม</button>
+        </span>
+        <button id="reiri" style="display: none;" onclick="kaŝiVortojn(1)">กลับ</button>
       </div>
       <div class="page" id="page2">
         <h1>คำอธิบาย</h1>
@@ -80,10 +69,13 @@
             <tr><td>บุรุษสรรพนาม </td><td>(ดูที่ "Pli") </td><td>mi </td><td>Pli</td></tr>
             <tr><td>สรรพนามแสดงควาเป็นเจ้าของ </td><td>(ดูที่ "Pli")</td><td>mia </td><td>Pli</td></tr>
             <tr><td>ĝis </td><td>บุพบท - จนกระทั่ง มักจะใช้เป็นรูปย่อของ "Ĝis revido" - "แล้วพบกันใหม่นะ".</td><td></td><td></td></tr>
+            <tr><td>@ </td><td>เครื่องหมายแอท (at)</td><td>ĉe</td><td></td></tr>
+            <tr><td>. </td><td>เครื่องหมายจุด</td><td>punkto</td><td></td></tr>
             </table>
       </div>
       <div class="page" id="page3">
         <h1>เรื่องสั้น</h1>
+        <h2>เพื่อนทางอีเมล</h2>
         <audio controls>
             <source src="./sonoj/1.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
@@ -100,7 +92,7 @@ Ana<br>
 </div>
       <div class="page" id="page4">
         <h1>แบบฝึกหัด</h1>
-  
+<p>แบบฝึกหัดต่อไปนี้เป็นแบบฝึกหัดแบบมีผู้ตรวจผ่านทางอีเมล ขอให้คุณกรอกคำตอบลงช่องว่างในเครื่องหมายขีด ให้ครบถ้วน จากนั้นกดปุ่มส่งอีเมล (แบบฝึกหัดนี้เหมาะสำหรับหน้าจอคอมพิวเตอร์เท่านั้น)</p> 
 <h2>1</h2> เติมคำในช่องวางให้ถูกต้อง <br>
 Saluton! <br>
 Mia nomo estas  <input id="viaNomo"  type="text" class="nomo">. <br>
@@ -114,7 +106,7 @@ Mia nomo estas  <input id="viaNomo"  type="text" class="nomo">. <br>
   
 <br>
 <br>
-    <button onclick="kontroliLaEkzercon()">ส่งอีเมล</button>
+    <button id="sendiRetmesagxoButono" onclick="kontroliLaEkzercon()">ส่งอีเมล</button>
     <span id="sendiRetmesagxon"></span>
     <script>
       let kursoNomo = "Parto 1 Saluton!"
@@ -126,23 +118,6 @@ Mia retpoŝtadreso # ana@lernu.net.  <br>
 Mia # estas 18 (dek ok).  <br>
 # estas via nomo?  <br>
 Kio estas # adreso # via retpoŝtadreso?`
-
-      let ekzercaro = ekzercaroDateno.replace(/#/g,"<span class=\"ekzerco\" contenteditable=\"true\">____</span>")
-      document.getElementById("ekzercaro").innerHTML = ekzercaro
-
-      // const VIAJ_RESPONDOJ
-      function kontroliLaEkzercon() {
-      let respondoj = document.getElementById("ekzercaro")
-
-      let lernantoNomo = document.getElementById("viaNomo").value
-      let MsgDeLernanto = "Saluton! Mi estas " + lernantoNomo + "%0D%0A%0D%0A"
-
-          let respondojInnerText = respondoj.innerText
-          respondojInnerText = respondojInnerText.replace(/ /g,"%20").replace(/\./g,"%0D%0A").replace(/\?/g,"%0D%0A")
-          console.log(respondojInnerText);
-          let MsgPorRetmesagxo = "subject=Leciono1&body=" + respondojInnerText
-          document.getElementById("sendiRetmesagxon").innerHTML = "<a href=\"https://mail.google.com/mail/u/0/?fs=1&to=verdaelefanto@gmail.com&su="+ kursoNomo + "&cc&bcc&body=" + MsgDeLernanto + respondojInnerText + "\n\nหากคุณมีข้อสงสัยสามารถแจ้งมาในอีเมลนี้เลย&tf=cm\" target=\"_blank\">ส่งอีเมลให้ตรวจ ภายใน 24 ชั่วโมง</a>"
-        }
     </script>
 
       </div>
@@ -169,5 +144,6 @@ Kio estas # adreso # via retpoŝtadreso?`
 Parto = ส่วน
       </div>
 </body>
+<script src="novajVortoj.js"></script>
 <script src="ekzerco.js"></script>
 </html>
